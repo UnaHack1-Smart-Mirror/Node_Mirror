@@ -6,7 +6,7 @@ const config = require('./config.json');
 const port = config.service_port;
 
 app.get('/config', (req ,res)=>{
-    res.json({'url': config.url});
+    res.json({'url': config.url,'lang': config.lang});
 })
 
 app.use('/', express.static(path.join(__dirname + '/../public/')));

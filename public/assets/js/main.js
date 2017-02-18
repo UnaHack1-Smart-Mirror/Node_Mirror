@@ -11,44 +11,32 @@ function time() {
 };
 
 var msgs = [];
+var config;
 
 $(document).ready(function () {
+    $.getJSON("/config", (data) => {
+        config = data;
+        update_room_data();
+        update_pm25();
+        update_yahoo();
+    });
     setInterval("time()", 1000);
     setInterval("update_room_data()", 20000);
-    setInterval("update_yahoo()", 10000);
+    setInterval("update_pm25()", 600000);
+    setInterval("update_yahoo()", 600000);
     $("#shift").click(function () {
         $(this).toggleClass("active");
     });
-    $.getJSON("http://api.waqi.info/feed/taipei/?token=4be6f1d2f01637e9b69ea4106ad6f6a1c3026157", (data) => {
-        var pm25 = data.data.iaqi.pm25.v;
-        if (pm25 <= 50) {
-            var airMsg = "Air quality is considered satisfactory, and air pollution poses little or no risk";
-        } else if (pm25 > 50 && pm25 <= 100) {
-            var airMsg = "Air quality is acceptable; however, for some pollutants there may be a moderate health concern for a very small number of people who are unusually sensitive to air pollution.";
-        } else if (pm25 > 100 && pm25 <= 150) {
-            var airMsg = "Members of sensitive groups may experience health effects. The general public is not likely to be affected.";
-        } else if (pm25 > 150 && pm25 <= 200) {
-            var airMsg = "Everyone may begin to experience health effects; members of sensitive groups may experience more serious health effects.";
-        } else if (pm25 > 200 && pm25 <= 300) {
-            var airMsg = "Health warnings of emergency conditions. The entire population is more likely to be affected.";
-        } else {
-            var airMsg = "Health alert: everyone may experience more serious health effects.";
-        }
-        msgs.push(airMsg);
-    });
-    update_room_data();
-    update_yahoo();
+
+
 });
 
 function update_room_data() {
-    $.getJSON("/config", (data) => {
-        var url = data.url;
-        $.getJSON(url, (data) => {
-            var hum = data.hum;
-            var temp = data.temp;
-            document.getElementById("temp").innerText = "Room Temperature : " + temp + "℃";
-            document.getElementById("hum").innerText = "Hum : " + hum + "%";
-        });
+    $.getJSON(config.url, (data) => {
+        var hum = data.hum;
+        var temp = data.temp;
+        document.getElementById("temp").innerText = "Room Temperature : " + temp + "℃";
+        document.getElementById("hum").innerText = "Hum : " + hum + "%";
     });
 }
 
@@ -99,4 +87,24 @@ function update_yahoo() {
             }
         })
     })
+}
+
+function update_pm25() {
+    $.getJSON("http://api.waqi.info/feed/taipei/?token=4be6f1d2f01637e9b69ea4106ad6f6a1c3026157", (data) => {
+        var pm25 = data.data.iaqi.pm25.v;
+        if (pm25 <= 50) {
+            var id = 0;
+        } else if (pm25 > 50 && pm25 <= 100) {
+            var id = 1;
+        } else if (pm25 > 100 && pm25 <= 150) {
+            var id = 2;
+        } else if (pm25 > 150 && pm25 <= 200) {
+            var id = 3;
+        } else if (pm25 > 200 && pm25 <= 300) {
+            var id = 4;
+        } else {
+            var id = 5;
+        }
+        msgs.push(lang[config.lang].pm25[id]);
+    });
 }
