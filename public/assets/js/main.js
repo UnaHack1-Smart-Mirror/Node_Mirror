@@ -24,11 +24,12 @@ $(document).ready(function () {
     setInterval("update_room_data()", 20000);
     setInterval("update_pm25()", 600000);
     setInterval("update_yahoo()", 600000);
+});
+
+$(document).ready(function () {
     $("#shift").click(function () {
         $(this).toggleClass("active");
     });
-
-
 });
 
 function update_room_data() {
