@@ -14,7 +14,9 @@ var lang = {
             'rain': 'Remember to bring an umbrella with you!',
             'showers': 'Remember to bring an umbrella with you!',
             'cold': 'Remember to wear warm clothes!'
-        }
+        },
+        'temp': 'Room temperature',
+        'hum': 'Room humidity'
     },
     'zh': {
         'pm25': [
@@ -31,6 +33,8 @@ var lang = {
             'rain': '外面在下大雨，記得帶雨傘，路上小心！',
             'showers': '外面在下雨，請記得帶雨傘喔～',
             'cold': '天氣較寒，請多穿衣物記得保暖 ^_^'
-        }
+        },
+        'temp': '室內溫度',
+        'hum': '室內濕度'
     }
 };

@@ -42,8 +42,8 @@ function update_room_data() {
     $.getJSON(config.url, (data) => {
         var hum = data.hum;
         var temp = data.temp;
-        app.temp = temp;
-        app.hum = hum;
+        app.temp = `${lang[config.lang].temp} : ${temp}`;
+        app.hum = `${lang[config.lang].hum} : ${hum}`;
     });
 }
 
