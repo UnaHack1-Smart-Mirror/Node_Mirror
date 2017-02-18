@@ -1,6 +1,8 @@
 {
-    "url" : "http://yourdomain/db",
+    "port": 8000,
+    "url" : "http://yourdomain:port/db",
     "user": "user",
     "password": "password",
-    "server": "dbserver"
+    "server": "dbserver",
+    "lang": "en"
 }

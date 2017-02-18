@@ -3,7 +3,7 @@ const path = require('path');
 const app = express();
 const db = require('./db');
 const config = require('./config.json');
-const port = 8000;
+const port = config.service_port;
 
 app.get('/config', (req ,res)=>{
     res.json({'url': config.url});
