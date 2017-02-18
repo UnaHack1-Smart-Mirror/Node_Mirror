@@ -25,20 +25,21 @@ function time() {
 
 $(document).ready(function () {
     $.getJSON("/config", (data) => {
+        config = data;
         update_room_data();
-        update_pm25(data);
+        update_pm25();
         update_yahoo();
     });
 
     setInterval("time()", 1000);
     setInterval("update_room_data()", 20000);
-    setInterval("update_pm25(data)", 600000);
+    setInterval("update_pm25()", 600000);
     setInterval("update_yahoo()", 600000);
 
 });
 
 function update_room_data() {
-    $.getJSON("/db", (data) => {
+    $.getJSON(config.url, (data) => {
         var hum = data.hum;
         var temp = data.temp;
         app.temp = temp;
@@ -57,39 +58,36 @@ function update_yahoo() {
         var sunriseTime = (parseInt(sunrise[0], 10)) * 60 + (parseInt(sunrise[1], 10));
         var sunsetTime = (parseInt(sunset[0], 10) + 12) * 60 + (parseInt(sunset[1], 10));
         var nowTime = currentdate.getHours() * 60 + currentdate.getMinutes();
+        var time = 'day';
+        var imgLink = '';
 
         if (wc.indexOf('Cloudy') > 0) {
-            var imgLink = 'clouds';
+            imgLink = 'clouds';
         }
         if (wc.indexOf('Sunny') > 0) {
-            var imgLink = 'clear';
-            var warn = "Remember to bring an umbrella with you!";
+            imgLink = 'clear';
         }
         if (wc.indexOf('Rain') > 0) {
-            var imgLink = 'rain';
-            var warn = "Remember to bring an umbrella with you!";
+            imgLink = 'rain';
         }
         if (wc.indexOf('Shower') > 0) {
-            var imgLink = 'showers';
-            var warn = "Remember to bring an umbrella with you!";
+            imgLink = 'showers';
         }
         if ((nowTime > sunsetTime) | (nowTime < sunriseTime)) {
             var time = 'night';
-        } else {
-            var time = 'day';
         }
         if (weather <= 25) {
-            var warn = "Remember warm clothes!";
+            app.msgs.push(lang[config.lang].warn['cold']);
         }
         app.weather = weather;
         app.wc = wc;
-        app.msgs.push(warn);
+        app.msgs.push(lang[config.lang].warn[imgLink]);
         $(".weather>img").attr('src', '/assets/images/icon/weather-' + imgLink + '-' + time + '.png');
         $("#next").css("background-image", "url(/assets/images/" + time + "-bg.jpg)");
     })
 }
 
-function update_pm25(config) {
+function update_pm25() {
     $.getJSON("http://api.waqi.info/feed/taipei/?token=4be6f1d2f01637e9b69ea4106ad6f6a1c3026157", (data) => {
         var pm25 = data.data.iaqi.pm25.v;
         if (pm25 <= 50) {
