@@ -69,15 +69,15 @@ function update_yahoo() {
         }
         if (wc.indexOf('Sunny') > 0) {
             var imgLink = 'clear';
-            msgs.push("Remember to bring an umbrella with you!");
+            var warn = "Remember to bring an umbrella with you!";
         }
         if (wc.indexOf('Rain') > 0) {
             var imgLink = 'rain';
-            msgs.push("Remember to bring an umbrella with you!");
+            var warn = "Remember to bring an umbrella with you!";
         }
         if (wc.indexOf('Shower') > 0) {
             var imgLink = 'showers';
-            msgs.push("Remember to bring an umbrella with you!");
+            var warn = "Remember to bring an umbrella with you!";
         }
         if ((nowTime > sunsetTime) | (nowTime < sunriseTime)) {
             var time = 'night';
@@ -85,8 +85,9 @@ function update_yahoo() {
             var time = 'day';
         }
         if (weather <= 25) {
-            msgs.push("Remember warm clothes!");
+            var warn = "Remember warm clothes!";
         }
+        msgs.push(warn);
         $(".weather>img").attr('src', '/assets/images/icon/weather-' + imgLink + '-' + time + '.png');
         $("#next").css("background-image", "url(/assets/images/" + time + "-bg.jpg)");
         var app = new Vue({
