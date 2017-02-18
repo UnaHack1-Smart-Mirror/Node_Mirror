@@ -4,5 +4,6 @@
     "user": "user",
     "password": "password",
     "server": "dbserver",
-    "lang": "en"
+    "lang": "en",
+    "location": "taipei, tw"
 }

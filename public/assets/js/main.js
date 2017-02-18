@@ -48,7 +48,7 @@ function update_room_data() {
 }
 
 function update_yahoo() {
-    $.getJSON("https://query.yahooapis.com/v1/public/yql?q=select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='taipei, tw') and u='c'&format=json", (callback) => {
+    $.getJSON(`https://query.yahooapis.com/v1/public/yql?q=select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='${config.location}') and u='c'&format=json`, (callback) => {
         var data = callback.query.results.channel;
         var weather = data.item.condition.temp;
         var wc = " " + data.item.condition.text;
