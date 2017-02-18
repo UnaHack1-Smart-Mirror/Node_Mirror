@@ -77,11 +77,11 @@ function update_yahoo() {
             var time = 'night';
         }
         if (weather <= 25) {
-            app.msgs.push(lang[config.lang].warn['cold']);
+            app.msgs.unshift(lang[config.lang].warn['cold']);
         }
         app.weather = weather;
         app.wc = lang[config.lang].wc[data.item.condition.text];
-        app.msgs.push(lang[config.lang].warn[imgLink]);
+        app.msgs.unshift(lang[config.lang].warn[imgLink]);
         $(".weather>img").attr('src', '/assets/images/icon/weather-' + imgLink + '-' + time + '.png');
         $("#next").css("background-image", "url(/assets/images/" + time + "-bg.jpg)");
     })
@@ -103,6 +103,6 @@ function update_pm25() {
         } else {
             var id = 5;
         }
-        app.msgs.push(lang[config.lang].pm25[id]);
+        app.msgs.unshift(lang[config.lang].pm25[id]);
     });
 }
