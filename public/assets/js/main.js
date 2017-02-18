@@ -61,16 +61,16 @@ function update_yahoo() {
         var time = 'day';
         var imgLink = '';
 
-        if (wc.indexOf('Cloudy') > 0) {
+        if (~wc.indexOf('Cloudy')) {
             imgLink = 'clouds';
         }
-        if (wc.indexOf('Sunny') > 0) {
+        if (~wc.indexOf('Sunny')) {
             imgLink = 'clear';
         }
-        if (wc.indexOf('Rain') > 0) {
+        if (~wc.indexOf('Rain')) {
             imgLink = 'rain';
         }
-        if (wc.indexOf('Shower') > 0) {
+        if (~wc.indexOf('Shower')) {
             imgLink = 'showers';
         }
         if ((nowTime > sunsetTime) | (nowTime < sunriseTime)) {

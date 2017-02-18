@@ -63,7 +63,7 @@ var lang = {
             'Rain': '下雨',
             'Scattered Showers': '陣雨',
             'Scattered Thunderstorms': '雷陣雨',
-            'Showers': '傾盆大雨',
+            'Showers': '小雨',
             'Snow Showers': '大雪',
             'Snow': '下雪',
             'Sunny': '晴天',
