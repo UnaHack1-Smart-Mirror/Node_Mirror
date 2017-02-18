@@ -15,14 +15,17 @@
                 <header>
                     <img src="/assets/images/logo.png" alt="" class="logo">
                     <div class="time">
-                        <h1 id="time" class="title"></h1>
-                        <p id="date" class="subtitle"></p>
+                        <h1 id="time" class="title">{{ tt }}</h1>
+                        <p id="date" class="subtitle">{{ dd }}</p>
                     </div>
                     <div class="weather">
                         <img src="" alt="">
-                        <span><h1 class="title">{{ weather }} ℃</h1>
-                        <p class="subtitle">{{ wc }}</p>
-                        <p id="temp" class="content"></p><p id="hum" class="content"></p></span>
+                        <span>
+                            <h1 class="title">{{ weather }} ℃</h1>
+                            <p class="subtitle">{{ wc }}</p>
+                            <p id="temp" class="content">Room Temperature : {{ temp }}℃</p>
+                            <p id="hum" class="content">Hum : {{ hum }}%</p>
+                        </span>
                     </div>
                 </header>
                 <div id="msg" v-for="msg in msgs">
@@ -30,7 +33,7 @@
                 </div>
             </div>
         </div>
-        <div id="shift" onclick="action();"><i class="fa fa-arrows-alt" aria-hidden="true"></i>
+        <div id="shift" @click="shift = !shift" v-bind:class="{ active: shift }"><i class="fa fa-arrows-alt" aria-hidden="true"></i>
         </div>
     </div>
     <script src="/assets/js/jquery-3.1.1.min.js"></script>

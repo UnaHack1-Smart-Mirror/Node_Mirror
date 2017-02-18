@@ -1,3 +1,17 @@
+var app = new Vue({
+    el: '#next',
+    data: {
+        weather: "25",
+        wc: "Sunny",
+        msgs: [],
+        tt: "00:00",
+        dd: "1960/1/1",
+        shift: false,
+        temp: 25,
+        hum: 50
+    }
+});
+
 function time() {
     var currentdate = new Date();
     var date = currentdate.getFullYear() + " / " +
@@ -5,46 +19,30 @@ function time() {
         currentdate.getDate();
     var time = currentdate.getHours() + ":" +
         (currentdate.getMinutes() < 10 ? '0' : '') + currentdate.getMinutes();
-    document.getElementById("time").innerText = time;
-    document.getElementById("date").innerText = date;
-
+    app.tt = time;
+    app.dd = date;
 };
-
-var msgs = [];
-var config;
 
 $(document).ready(function () {
     $.getJSON("/config", (data) => {
-        config = data;
         update_room_data();
-        update_pm25();
+        update_pm25(data);
         update_yahoo();
-    });
-
-    $("#shift").click(function () {
-        $(this).toggleClass("active");
     });
 
     setInterval("time()", 1000);
     setInterval("update_room_data()", 20000);
-    setInterval("update_pm25()", 600000);
+    setInterval("update_pm25(data)", 600000);
     setInterval("update_yahoo()", 600000);
 
 });
-
-function action() {
-    $("#shift").click(function () {
-        $(this).toggleClass("active");
-    });
-}
-
 
 function update_room_data() {
     $.getJSON("/db", (data) => {
         var hum = data.hum;
         var temp = data.temp;
-        document.getElementById("temp").innerText = "Room Temperature : " + temp + "℃";
-        document.getElementById("hum").innerText = "Hum : " + hum + "%";
+        app.temp = temp;
+        app.hum = hum;
     });
 }
 
@@ -83,21 +81,15 @@ function update_yahoo() {
         if (weather <= 25) {
             var warn = "Remember warm clothes!";
         }
-        msgs.push(warn);
+        app.weather = weather;
+        app.wc = wc;
+        app.msgs.push(warn);
         $(".weather>img").attr('src', '/assets/images/icon/weather-' + imgLink + '-' + time + '.png');
         $("#next").css("background-image", "url(/assets/images/" + time + "-bg.jpg)");
-        var app = new Vue({
-            el: '#next',
-            data: {
-                weather: weather,
-                wc: wc,
-                msgs: msgs
-            }
-        })
     })
 }
 
-function update_pm25() {
+function update_pm25(config) {
     $.getJSON("http://api.waqi.info/feed/taipei/?token=4be6f1d2f01637e9b69ea4106ad6f6a1c3026157", (data) => {
         var pm25 = data.data.iaqi.pm25.v;
         if (pm25 <= 50) {
@@ -113,6 +105,6 @@ function update_pm25() {
         } else {
             var id = 5;
         }
-        msgs.push(lang[config.lang].pm25[id]);
+        app.msgs.push(lang[config.lang].pm25[id]);
     });
 }
