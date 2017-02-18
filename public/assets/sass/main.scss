@@ -17,7 +17,7 @@ body {
     @include backgroundConfig;
     .container {
         height: 100vh;
-        weight: 100vw;
+        width: 100vw;
         .content {
             display: flex;
             padding: 2em;
@@ -93,13 +93,14 @@ body {
                 margin: 0;
                 position: relative;
                 top: 22.5em;
-                text-align: center;
+                text-align: left;
                 display: flex;
                 margin: 1em 0;
                 padding: 1em;
                 background-color: rgba(255, 255, 255, .4);
                 border-radius: 1em;
                 p {
+                    text-align: left;
                     display: flex;
                     padding: 0;
                 }
