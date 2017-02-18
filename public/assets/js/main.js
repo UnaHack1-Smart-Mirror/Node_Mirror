@@ -51,7 +51,7 @@ function update_yahoo() {
     $.getJSON(`https://query.yahooapis.com/v1/public/yql?q=select * from weather.forecast where woeid in (select woeid from geo.places(1) where text='${config.location}') and u='c'&format=json`, (callback) => {
         var data = callback.query.results.channel;
         var weather = data.item.condition.temp;
-        var wc = " " + data.item.condition.text;
+        var wc = data.item.condition.text;
         var currentdate = new Date();
         var sunrise = data.astronomy.sunrise.slice(0, -3).split(":");
         var sunset = data.astronomy.sunset.slice(0, -3).split(":");
@@ -80,7 +80,7 @@ function update_yahoo() {
             app.msgs.push(lang[config.lang].warn['cold']);
         }
         app.weather = weather;
-        app.wc = wc;
+        app.wc = lang[config.lang].wc[data.item.condition.text];
         app.msgs.push(lang[config.lang].warn[imgLink]);
         $(".weather>img").attr('src', '/assets/images/icon/weather-' + imgLink + '-' + time + '.png');
         $("#next").css("background-image", "url(/assets/images/" + time + "-bg.jpg)");

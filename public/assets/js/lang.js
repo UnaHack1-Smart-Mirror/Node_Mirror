@@ -16,7 +16,24 @@ var lang = {
             'cold': 'Remember to wear warm clothes!'
         },
         'temp': 'Room temperature',
-        'hum': 'Room humidity'
+        'hum': 'Room humidity',
+        'wc': {
+            'Breezy': 'Breezy',
+            'Cloudy': 'Cloudy',
+            'Mostly Cloudy': 'Mostly Cloudy',
+            'Mostly Sunny': 'Mostly Sunny',
+            'Partly Cloudy': 'Partly Cloudy',
+            'Rain And Snow': 'Rain And Snow',
+            'Rain': 'Rain',
+            'Scattered Showers': 'Scattered Showers',
+            'Scattered Thunderstorms': 'Scattered Thunderstorms',
+            'Showers': 'Showers',
+            'Snow Showers': 'Snow Showers',
+            'Snow': 'Snow',
+            'Sunny': 'Sunny',
+            'Thunderstorms': 'Thunderstorms',
+            'Windy': 'Windy'
+        }
     },
     'zh': {
         'pm25': [
@@ -35,6 +52,23 @@ var lang = {
             'cold': '天氣較寒，請多穿衣物記得保暖 ^_^'
         },
         'temp': '室內溫度',
-        'hum': '室內濕度'
+        'hum': '室內濕度',
+        'wc': {
+            'Breezy': '微風徐徐',
+            'Cloudy': '多雲',
+            'Mostly Cloudy': '多雲時晴',
+            'Mostly Sunny': '多晴時雲',
+            'Partly Cloudy': '偶雲時晴',
+            'Rain And Snow': '雨與雪',
+            'Rain': '下雨',
+            'Scattered Showers': '陣雨',
+            'Scattered Thunderstorms': '雷陣雨',
+            'Showers': '傾盆大雨',
+            'Snow Showers': '大雪',
+            'Snow': '下雪',
+            'Sunny': '晴天',
+            'Thunderstorms': '雷雨',
+            'Windy': '風大'
+        }
     }
 };
