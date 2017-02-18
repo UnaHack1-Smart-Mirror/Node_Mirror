@@ -14,8 +14,8 @@ var msgs = [];
 
 $(document).ready(function () {
     setInterval("time()", 1000);
-    setInterval("update_room_data", 20000);
-    setInterval("update_yahoo", 10000);
+    setInterval("update_room_data()", 20000);
+    setInterval("update_yahoo()", 10000);
     $("#shift").click(function () {
         $(this).toggleClass("active");
     });
