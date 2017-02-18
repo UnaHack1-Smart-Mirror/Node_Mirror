@@ -31,8 +31,9 @@ router.get('/', (req, res) => {
 
     var result = "";
     request.on('row', function (columns) {
-        result = (new Buffer(columns[2].value, 'hex').toString('utf-8'));
-        data = result.split(",");
+        var data = [];
+        data[0] = parseInt(columns[2].value.substr(0, 2), 16);
+        data[1] = parseInt(columns[2].value.substr(2, 2), 16) - 128;
         res.status(200).json({
             "hum": data[0],
             "temp": data[1]
