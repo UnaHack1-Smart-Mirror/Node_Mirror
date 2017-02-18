@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>NEXT</title>
+    <link rel="stylesheet" href="/assets/css/main.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
+</head>
+
+<body>
+    <div id="next">
+        <div class="container">
+            <div class="content">
+                <header>
+                    <img src="/assets/images/logo.png" alt="" class="logo">
+                    <div class="time">
+                        <h1 id="time" class="title"></h1>
+                        <p id="date" class="subtitle"></p>
+                    </div>
+                    <div class="weather">
+                        <img src="" alt="">
+                        <span><h1 class="title">{{ weather }} ℃</h1>
+                        <p class="subtitle">{{ wc }}</p>
+                        <p id="temp" class="content"></p><p id="hum" class="content"></p></span>
+                    </div>
+                </header>
+                <div id="msg" v-for="msg in msgs">
+                    <p class="content">{{ msg }}</p>
+                </div>
+            </div>
+        </div>
+        <div id="shift"><i class="fa fa-arrows-alt" aria-hidden="true"></i>
+        </div>
+    </div>
+    <script src="/assets/js/jquery-3.1.1.min.js"></script>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="/assets/js/main.js"></script>
+    <script src="https://query.yahooapis.com/v1/public/yql?q=select item.condition from weather.forecast where woeid in (select woeid from geo.places(1) where text='taipei, tw') and u='c'&format=json&callback=callbackFunction"></script>
+</body>
+
+</html>

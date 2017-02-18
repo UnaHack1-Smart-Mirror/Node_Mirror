@@ -1,0 +1,6 @@
+{
+    "url" : "http://yourdomain/db",
+    "user": "user",
+    "password": "password",
+    "server": "dbserver"
+}
